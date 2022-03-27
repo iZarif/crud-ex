@@ -1,0 +1,15 @@
+html, body {
+    height: 100%;
+}
+
+.container {
+    height: 100%;
+}
+
+#push {
+    height: 40%;
+}
+
+.errLabel {
+    color: #FF0000;
+}
