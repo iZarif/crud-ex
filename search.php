@@ -15,7 +15,7 @@ $id = $_GET["id"];
 
 if (!is_numeric($id) || $id < 0) {
     mysqli_close($db);
-    echo($m->render("error", array("errText" => "ID должен быть неотрицательным числом")));
+    echo($m->render("index", array("id" => $id, "errText" => "ID должен быть неотрицательным числом", "errClass" => "has-error")));
 }
 
 $countQuery = sprintf("SELECT COUNT(*) FROM accounts WHERE id='%d'", $id);
