@@ -22,9 +22,13 @@ $countQuery = sprintf("SELECT COUNT(*) FROM accounts WHERE id='%d'", $id);
 $countQueryResult = mysqli_query($db, $countQuery);
 $recordsCount = mysqli_fetch_array($countQueryResult)[0];
 
+mysqli_free_result($countQueryResult);
+
 $searchQuery = sprintf("SELECT * FROM accounts WHERE id='%d'", $id);
 $searchQueryResult = mysqli_query($db, $searchQuery);
 $records = mysqli_fetch_all($searchQueryResult, MYSQLI_ASSOC);
+
+mysqli_free_result($searchQueryResult);
 
 echo($m->render("search", array("recordsCount" => $recordsCount, "records" => $records)));
 
