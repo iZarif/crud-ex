@@ -18,17 +18,13 @@ if (!is_numeric($id) || $id < 0) {
     echo($m->render("error", array("errText" => "ID должен быть неотрицательным числом")));
 }
 
-$countQuery = "SELECT COUNT(*) FROM accounts WHERE id='" . $id . "'";
-$countQueryResult = $db->query($countQuery);
+$countQuery = sprintf("SELECT COUNT(*) FROM accounts WHERE id='%d'", $id);
+$countQueryResult = mysqli_query($db, $countQuery);
 $recordsCount = mysqli_fetch_array($countQueryResult)[0];
 
-$searchQuery = "SELECT * FROM accounts WHERE id='" . $id . "'";
-$searchQueryResult = $db->query($searchQuery);
-$records = [];
-
-while ($record = mysqli_fetch_assoc($searchQueryResult)) {
-    $records[] = $record;
-}
+$searchQuery = sprintf("SELECT * FROM accounts WHERE id='%d'", $id);
+$searchQueryResult = mysqli_query($db, $searchQuery);
+$records = mysqli_fetch_all($searchQueryResult, MYSQLI_ASSOC);
 
 echo($m->render("search", array("recordsCount" => $recordsCount, "records" => $records)));
 
